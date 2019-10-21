@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+     <!--1、导入vue的包-->
+     <script src="./lib/vue.js"></script>
+
+     <style>
+            [v-cloak]{
+           
+                display: none;
+            }
+     </style>
+</head>
+
+
+<body>
+    
+<div id="app">
+ <p v-cloak>{{msg}}</p>
+</div>
+
+</body>
+</html>
+
+<script>
+
+var vm=new Vue({
+   el:'#app',
+   data:{
+    msg:"v-cloak可解决闪烁时看到{{}}的问题"
+   },
+})
+
+</script>
