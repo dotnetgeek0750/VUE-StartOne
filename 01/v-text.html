@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--1、导入vue的包-->
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!--这样的用法效果一样-->
+      <p>{{msg}}</p>
+      <p v-text="msg"></p>
+
+        <!--这样的用法效果不一样-->
+        <p>这里的文字，{{msg}}  不会被覆盖</p>
+        <p v-text="msg">这里的文字，会被覆盖</p>
+    </div>
+</body>
+</html>
+
+<script>
+ var vm=new Vue({
+    el:'#app',
+    data:{
+        msg:"1234"
+    },
+ });
+</script>

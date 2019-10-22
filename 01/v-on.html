@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--1、导入vue的包-->
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+     
+          <input type="button" value="我是按钮" :title="bottonTitle + '123'"  v-on:click="show" />
+
+          <input type="button" value="我是按钮" :title="bottonTitle + '123'"  v-on:mouseover="overfunc" />
+        
+    </div>
+</body>
+</html>
+
+<script>
+ var vm=new Vue({
+    el:'#app',
+    data:{
+        bottonTitle:"我是一个Title"
+    },
+    methods:{
+        show:function(){
+            alert(1);
+        },
+        overfunc:function(){
+            alert(2);
+        }
+    }
+ });
+</script>
