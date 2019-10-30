@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <!--1、导入vue的包-->
-    <script src="./lib/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <!--1、导入vue的包-->
+  <script src="./lib/vue.js"></script>
 </head>
+
 <body>
 
-    <div id="app">
-  <input type="button" value="浪起来" v-on:click="lang">
-  <input type="button" value="别浪">
+  <div id="app">
+    <input type="button" value="浪起来" v-on:click="lang">
+    <input type="button" value="别浪" v-on:click="stop">
     <h4>{{msg}}</h4>
-</div>
+  </div>
 </body>
+
 </html>
 
 
 
 <script>
 
-//分析
-//1、给【浪起来】按钮，绑定一个事件，v-on
-//2、在给按钮事件处理函数中，写相关的业务逻辑代码，拿到msg 字符串，然后调用字符串的substring来进行字符串的截取操作。
-//把第一个字符串截取出来，放到最后一个位置即可。
-//3、为了实现点击下按钮，自动截取的功能，需要把2 步骤中的代码，放到一个定时器中国区。
+  //分析
+  //1、给【浪起来】按钮，绑定一个事件，v-on
+  //2、在给按钮事件处理函数中，写相关的业务逻辑代码，拿到msg 字符串，然后调用字符串的substring来进行字符串的截取操作。
+  //把第一个字符串截取出来，放到最后一个位置即可。
+  //3、为了实现点击下按钮，自动截取的功能，需要把2 步骤中的代码，放到一个定时器中国区。
 
-  var vm=new Vue({
-   el:'#app',
-   data:{
-       msg:'猥琐发育，别浪！！！！',
-   },
-   methods:{
-       lang(){
-         setInterval(() => {
-            var start= this.msg.substring(0,1)
-            var end= this.msg.substring(1)
-            this.msg=  end+ start
-         }, 1000);
-       }
-   }
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      msg: '猥琐发育，别浪！！！！',
+      intervalId: null
+    },
+    methods: {
+      lang() {
+        if (this.intervalId != null)
+          return;
+        this.intervalId = setInterval(() => {
+          var start = this.msg.substring(0, 1)
+          var end = this.msg.substring(1)
+          this.msg = end + start
+        }, 200);
+      },
+      stop() {
+        clearInterval(this.intervalId)
+        //清除了定时器，但是intervalId不会被置为null，需要手动设置
+        this.intervalId = null
+      }
+    }
   });
 </script>
