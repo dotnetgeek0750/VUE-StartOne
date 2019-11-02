@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <style>
+        .red {
+            color: red;
+        }
+
+        .thin {
+            font-weight: 200;
+        }
+
+        .italic {
+            font-style: italic
+        }
+
+        .active {
+            letter-spacing: 0.5em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!--CSS中的用法-->
+        <h1 class="red thin">这里是H1</h1>
+
+        <!--Vue第一种使用方法，传递一个css数组，这里的Class需要使用v-bind做数据绑定-->
+        <h1 :class="['red','thin']">这里是H1</h1>
+
+        <!--Vue第二种使用方法，三元表达式-->
+        <h1 :class="['red','thin',flag?'active':'']">这里是H1</h1>
+
+        <!--Vue第三种使用方法，在数组中使用对象来代替三元表达式，提高代码可读性-->
+        <h1 :class="['red','thin',{'active':flag}]">这里是H1</h1>
+
+        <!--Vue第四种使用方法，v-bind对象的时候，对象的属性名是 类名:是否有效-->
+        <h1 :class="{red:true,thin:true,italic:true}">这里是H1</h1>
+
+        <!--或者直接抽成一个对象变量-->
+        <h1 :class="classObj">这里是H1</h1>
+
+        <h1 :style="{color:'red','font-weight':200}">Vue 内联样式</h1>
+        <h1 :style="styleObj">Vue 内联样式</h1>
+        <h1 :style="[styleObj,styleObj]">Vue 内联样式</h1>
+    </div>
+</body>
+
+</html>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag: true,
+            classObj: { red: true, thin: true, italic: false },
+            styleObj:{color:'red','font-weight':200},
+        },
+        methods: {
+
+        }
+    })
+</script>
