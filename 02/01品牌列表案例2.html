@@ -44,7 +44,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="item in list" :key="item.id">
+                <tr v-for="item in search(keywords)" :key="item.id">
                     <td>{{item.id}}</td>
                     <td v-text="item.name"></td>
                     <td>{{item.ctime}}</td>
@@ -62,12 +62,19 @@
 
 <script>
 
+    //全局的过滤器，进行时间格式化
+    Vue.filter('dateFormat',function(dateStr){
+        //根据给定的时间字符串，得出特定时间
+        var dt=new Date(dateStr)
+        var y = dt
+    })
+
     var vm = new Vue({
         el: "#app",
         data: {
             id: '',
             name: '',
-            keywords:'', //搜索的关键字
+            keywords: '', //搜索的关键字
             list: [
                 { id: 1, name: "奔驰", ctime: new Date() },
                 { id: 2, name: "宝马", ctime: new Date() }
@@ -96,6 +103,26 @@
                     }
                 })
                 this.list.splice(index, 1)
+            },
+            search(keywords) { //根据关键字，进行数据的搜索
+               
+               //第一种：遍历list，判断name是否包含，如果包含则push到新数组
+                var newList = [];
+                this.list.forEach(item => {
+                    if (item.name.indexOf(keywords) != -1) {
+                        newList.push(item)
+                    }
+                })
+                return newList
+
+                //第二种：使用es6新方法 filter
+                newList= this.list.filter(item => {
+                    if (item.name.includes(keywords)) {
+                        return item
+                    }
+                })
+                return newList
+
             }
         }
     })
