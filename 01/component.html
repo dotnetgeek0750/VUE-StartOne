@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!--1、导入vue的包-->
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+         <!--不带参数的组件-->
+         <todo-item></todo-item>
+
+         <!--带参数的组件-->
+         <todo-item-param v-for="item in todoDataList"  v-bind:todo="item" v-key="item.id"></todo-item-param>
+         
+    </div>
+</body>
+</html>
+
+<script>
+
+//声明一个简单的组件
+//组件名：todo-item
+//模板内容：template
+Vue.component("todo-item",{
+     template:"<li>这是个待办项</li>"
+ })
+
+//声明一个带参数的组件
+//组件名：todo-item-param
+//接受参数：props
+//模板内容：template，可用插值表达式
+ Vue.component("todo-item-param",{
+     props:['todo'],
+     template:"<li>这是个待办项-带参数：{{todo.item}}</li>"
+ })
+
+
+ var vm=new Vue({
+    el:'#app',
+    data:{
+        todoDataList:[{id:1,item:'吃饭'},{id:2,item:'睡觉'},{id:3,item:'打豆豆'}]
+    },
+ });
+
+
+
+</script>

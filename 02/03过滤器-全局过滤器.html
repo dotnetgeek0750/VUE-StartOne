@@ -11,9 +11,10 @@
 
 <body>
     <div id="app">
+        <!--过滤器的调用方式-->
         <p>{{ msg | msgFormat}}</p>
 
-        <p>{{ msg | msgFormat2('参数2')}}</p>
+        <p>{{ msg | msgFormat2('疯狂')}}</p>
     </div>
 </body>
 </html>
@@ -22,18 +23,19 @@
     //匿名函数，第一个参数已经是固定了，就是调用时的管道前面的值
     //可以在使用的时候，传递第二个参数
     Vue.filter('msgFormat', function (data) {
-        return data.replace(/oldvalue/g, 'newvalue')
+        //replace方法，第一个参数，除了可写一个字符串之外，可以写一个正则。
+        return data.replace(/单纯/g, '邪恶')
     })
 
     Vue.filter('msgFormat2', function (data, arg) {
-        return data + arg
+        return data.replace(/单纯/g, arg)
     })
 
     var vm = new Vue({
         el: '#app',
         data: {
-            msg: 'oldvalue,oldvalue'
+            msg: '曾经，我也是一个单纯的少年，单纯的我。'
         },
-        methods: {}
+        methods: {},
     })
 </script>
