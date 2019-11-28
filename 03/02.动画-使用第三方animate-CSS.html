@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+    <link rel="stylesheet" href="./lib/animate.css">
+</head>
+
+<body>
+    <div id="app">
+        <!--需求：点击按钮，让H3显示，再点击，让H3隐藏-->
+        <input type="button" value="toggle" @click="flag=!flag">
+
+        <!--1、使用transition元素，把需要被动画控制的元素，包裹起来-->
+        <!--transition元素，是vue官方提供的-->
+        <!--enter-active-class 控制进场动画，样式名是animate提供-->
+        <!--leave-active-class 控制离场动画，样式名是animate提供-->
+        <!--使用 :duration="毫秒值" 来统一设置入场和离场的动画时长-->
+        <!--使用:duration="{enter:200,leave:400}来分别设置入场、离场时长-->
+        <transition 
+        enter-active-class="animated bounceIn" 
+        leave-active-class="animated bounceOut" 
+        :duration="200"
+        :duration="{enter:200,leave:400}">
+            <h3  v-if="flag">这是一个H3</h3>
+        </transition>
+    </div>
+</body>
+</html>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag:false,
+            flag2:false
+        },
+        //方法
+        methods: {},
+    })
+</script>
