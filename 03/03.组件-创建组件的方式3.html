@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app"> 
+        <mycom3></mycom3>
+    </div>
+
+   <!--在控制的#app外面，使用template元素，定义组件的HTML模板结构-->
+    <template id="tmpl">
+        <div>
+            <h3>这是通过template元素，在外部定义的组件结构</h3>
+            <h4>有代码智能提示和高亮</h4>
+            <h5>好用不错</h5>
+        </div>
+    </template>
+
+</body>
+</html>
+<script>
+   //注意：无论是哪种方式创建出来的组件，
+   //组件的template模板，必须只有一个根元素
+    Vue.component('mycom3',{
+        template:'#tmpl'
+    })
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            flag:false
+        },
+        //方法
+        methods: {},
+    })
+</script>
