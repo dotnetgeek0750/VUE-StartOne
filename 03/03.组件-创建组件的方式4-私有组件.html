@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+
+<body>
+    <div id="app1"> 
+    </div>
+    <div id="app2">
+        <login></login>
+        <login2></login2>
+    </div>
+    <template id="temp2"><div>这里是template节点的模板</div></template>
+</body>
+</html>
+<script>
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {}, //数据
+        methods: {},//方法
+    })
+
+    var vm2 = new Vue({
+        el: '#app2',
+        data: {}, //数据
+        methods: {},//方法
+        filters:{},//过滤器
+        directives:{},//指令
+        components:{  //私有组件
+            login:{
+                template:'<h1>这是私有的Login组件</h1>'
+            },
+            login2:{
+                template:'#temp2'
+            }
+        },
+        beforeCreate(){},
+        created(){},
+    })
+</script>
