@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue.js"></script>
+</head>
+<body>
+    <div id="app1"> 
+    <!--父组件向子组件传递方法，使用的是事件绑定机制 v-on -->
+    <!--当我们自定义了一个事件属性之后，子组件就能够来调用传递的方法了-->
+      <com2 v-on:func123="show" v-on:func456="show2" v-on:funcpassobj="getbjfromson"></com2>
+    </div>
+
+    <template id="tmpl">
+        <div>
+            <h1>这是子组件</h1>
+            <input type="button" @click="myclick" value="这是子组件的按钮，触发父组件的方法" />
+            <input type="button" @click="myclick2" value="子组件向父组件传递对象">
+        </div>
+    </template>
+</body>
+</html>
+<script>
+    Vue.component('com2',{
+        template:'#tmpl',
+        data(){
+            return {
+                sonMsg:{name:'chh',age:18}
+            }
+        },
+        methods:{
+            myclick(){
+             this.$emit('func123')    
+             this.$emit('func456',789) 
+            },
+            myclick2(){
+            this.$emit('funcpassobj',this.sonMsg)
+            }
+        }
+    })
+    var vm1 = new Vue({
+        el: '#app1',
+        data: {
+            ObjParent:null,
+        }, 
+        methods:{
+            show(){
+                console.log("触发了父组件的show方法")
+            },
+            show2(data){
+                console.log("触发了父组件的show2方法，参数："+data)
+            },
+            getbjfromson(dataFromSon){
+             this.ObjParent=dataFromSon,
+             console.log(this.ObjParent)
+             console.log("已经把对象从子组件传递给父组件了")
+            }
+        },
+        components:{
+             
+        }
+    })
+</script>
